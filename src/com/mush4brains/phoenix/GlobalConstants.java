@@ -14,4 +14,8 @@ public class GlobalConstants {
     public int ICON_MAIN_PIRATE = 101;
     public int ICON_MAIN_ZOMBIE = 102;
     
+    public int RESPONSE_ONE = 100;
+    public int RESPONSE_TWO = 200;
+    public int RESPONSE_THREE = 300;
+    
 }

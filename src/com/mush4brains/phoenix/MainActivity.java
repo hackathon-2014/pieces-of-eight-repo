@@ -44,9 +44,9 @@ public class MainActivity extends Activity  implements OnClickListener {
     
     //set title
     ActionBar actionBar = getActionBar();
-    actionBar.setTitle("Office Survivor Guide");
+    actionBar.setTitle("Your Personal Office Survivor Guide");
     actionBar.setSubtitle("Ignore Everyone Else");
-    actionBar.setBackgroundDrawable(new ColorDrawable(Color.RED));
+    actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(163,  38,  56)));
     
     //get dimensions
     Context context = getApplicationContext();
@@ -112,16 +112,15 @@ public class MainActivity extends Activity  implements OnClickListener {
     states.addState(new int[] {}, getResources().getDrawable(idResourceZombie));
     imageView.setImageDrawable(states);
     params =new RelativeLayout.LayoutParams(256, 256);
-    layout.addView(imageView, params);  
-  
+    layout.addView(imageView, params);    
   }
 
 
   @Override
   public void onClick(View v) {
-    // TODO Auto-generated method stub
+
     if (v.getId() == mConstants.ICON_MAIN_NINJA){
-      Toast.makeText(getApplicationContext(), "Ninja selected",  Toast.LENGTH_SHORT).show();
+
       Bundle bundle = new Bundle();
       bundle.putString("attacker", "ninja");
       Intent intent = new Intent(this, InterviewActivity.class);
@@ -129,10 +128,20 @@ public class MainActivity extends Activity  implements OnClickListener {
       startActivity(intent);
     }
     else if (v.getId() == mConstants.ICON_MAIN_PIRATE){
-      Toast.makeText(getApplicationContext(), "Pirate selected",  Toast.LENGTH_SHORT).show();
+
+      Bundle bundle = new Bundle();
+      bundle.putString("attacker", "pirate");
+      Intent intent = new Intent(this, InterviewActivity.class);
+      intent.putExtras(bundle);      
+      startActivity(intent);      
     }
     else if (v.getId() == mConstants.ICON_MAIN_ZOMBIE){
-      Toast.makeText(getApplicationContext(), "Zombie selected",  Toast.LENGTH_SHORT).show();
+
+      Bundle bundle = new Bundle();
+      bundle.putString("attacker", "zombie");
+      Intent intent = new Intent(this, InterviewActivity.class);
+      intent.putExtras(bundle);      
+      startActivity(intent);      
     }
     
   }
