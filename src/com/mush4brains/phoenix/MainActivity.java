@@ -3,6 +3,7 @@ package com.mush4brains.phoenix;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -16,9 +17,9 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /* MainActivity entry point to app
  * Team: Chuck, Derick, and Sara
@@ -32,7 +33,7 @@ public class MainActivity extends Activity  implements OnClickListener {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    //setContentView(R.layout.activity_main);
     
     //portrait mode only
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -121,6 +122,11 @@ public class MainActivity extends Activity  implements OnClickListener {
     // TODO Auto-generated method stub
     if (v.getId() == mConstants.ICON_MAIN_NINJA){
       Toast.makeText(getApplicationContext(), "Ninja selected",  Toast.LENGTH_SHORT).show();
+      Bundle bundle = new Bundle();
+      bundle.putString("attacker", "ninja");
+      Intent intent = new Intent(this, InterviewActivity.class);
+      intent.putExtras(bundle);      
+      startActivity(intent);
     }
     else if (v.getId() == mConstants.ICON_MAIN_PIRATE){
       Toast.makeText(getApplicationContext(), "Pirate selected",  Toast.LENGTH_SHORT).show();
