@@ -1,7 +1,9 @@
 package com.mush4brains.phoenix;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -67,8 +69,8 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			mAttacker = extras.getString("attacker");
-			Toast.makeText(getApplicationContext(), mAttacker,
-					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(), mAttacker,
+			// Toast.LENGTH_SHORT).show();
 			if (mAttacker.equals("pirate")) {
 				mSurvival.LoadData("text/pirates.txt");
 				mSurvivalStep = mSurvival.getSurvivalStep(0);
@@ -150,6 +152,11 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		// A value of -1 indicates the terminating survival step.
 		if (mFirstResponseQuestionId == -1) {
 			Toast.makeText(this, "Game Over", Toast.LENGTH_LONG).show();
+			// try {
+			// this.showDialog("Game Over");
+			// } catch (Exception e) {
+			// Log.d(TAG, e.getMessage());
+			// }
 			finish();
 		}
 
@@ -158,5 +165,30 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		// Update second response button.
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
 		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
+	}
+
+	private void showDialog(final String alertMessage) throws Exception {
+		AlertDialog.Builder builder = new AlertDialog.Builder(
+				InterviewActivity.this);
+		builder.setMessage(alertMessage);
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// do something positive
+				Log.d(TAG, "Positive");
+				dialog.dismiss();
+			}
+		});
+
+		builder.setNegativeButton("Bummer",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Log.d(TAG, "Negative");
+						dialog.dismiss();
+					}
+				});
+
+		builder.show();
 	}
 }
