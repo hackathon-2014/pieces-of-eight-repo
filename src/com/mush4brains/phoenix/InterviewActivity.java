@@ -64,7 +64,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		layout.setBackgroundColor(Color.rgb(163, 38, 56));
 		setContentView(layout, params);
 		mSurvival = new SurvivalStepFactory(context.getAssets());
-		
+
 		// get attacker type
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -142,7 +142,8 @@ public class InterviewActivity extends Activity implements OnClickListener {
 			mSurvivalStep = mSurvival.getSurvivalStep(mFirstResponseQuestionId);
 			NextQuestion();
 		} else if (v.getId() == mConstants.RESPONSE_TWO) {
-			mSurvivalStep = mSurvival.getSurvivalStep(mSecondResponseQuestionId);
+			mSurvivalStep = mSurvival
+					.getSurvivalStep(mSecondResponseQuestionId);
 			NextQuestion();
 		} else if (v.getId() == mConstants.RESPONSE_THREE) {
 			mSurvivalStep = mSurvival.getSurvivalStep(mThirdResponseQuestionId);
@@ -156,9 +157,19 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		// Update the question text.
 		mQuestionTextView.setText(mSurvivalStep.getQuestionText());
 
+		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
+
+		// A value of -1 indicates the terminating survival step.
+		if (mFirstResponseQuestionId == -1) {
+			Toast.makeText(this, "Game Over", Toast.LENGTH_LONG).show();
+			finish();
+		} else if (mFirstResponseQuestionId == -2) {
+			Toast.makeText(this, "You Survived!", Toast.LENGTH_LONG).show();
+			finish();
+		}
+
 		// Update first response button.
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
-		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
 
 		// Update second response button.
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
