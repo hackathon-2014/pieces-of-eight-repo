@@ -33,11 +33,9 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 	private Button mFirstResponseButton;
 	private Button mSecondResponseButton;
-	private Button mThirdResponseButton;
 
 	private int mFirstResponseQuestionId;
 	private int mSecondResponseQuestionId;
-	private int mThirdResponseQuestionId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,35 +103,27 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		mQuestionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		layout.addView(mQuestionTextView, params);
 
+		// Display first response button
 		mFirstResponseButton = new Button(this);
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
-		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
-		mFirstResponseButton.setY(mScreenHeight - 1000);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
+		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
+		mFirstResponseButton.setY(mScreenHeight * 4 / 10);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mFirstResponseButton.setId(mConstants.RESPONSE_ONE);
 		mFirstResponseButton.setOnClickListener(this);
 		layout.addView(mFirstResponseButton, params);
 		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
 
+		// Display second response button
 		mSecondResponseButton = new Button(this);
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
-		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
-		mSecondResponseButton.setY(mScreenHeight - 750);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
+		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
+		mSecondResponseButton.setY(mScreenHeight * 7 / 10);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mSecondResponseButton.setId(mConstants.RESPONSE_TWO);
 		mSecondResponseButton.setOnClickListener(this);
 		layout.addView(mSecondResponseButton, params);
 		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
-
-		mThirdResponseButton = new Button(this);
-		mThirdResponseButton.setText(mSurvivalStep.getResponseText(2));
-		mThirdResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
-		mThirdResponseButton.setY(mScreenHeight - 500);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
-		mThirdResponseButton.setId(mConstants.RESPONSE_THREE);
-		mThirdResponseButton.setOnClickListener(this);
-		layout.addView(mThirdResponseButton, params);
-		mThirdResponseQuestionId = mSurvivalStep.getResponseNextId(2);
 	}
 
 	@Override
@@ -145,9 +135,6 @@ public class InterviewActivity extends Activity implements OnClickListener {
 			mSurvivalStep = mSurvival
 					.getSurvivalStep(mSecondResponseQuestionId);
 			NextQuestion();
-		} else if (v.getId() == mConstants.RESPONSE_THREE) {
-			mSurvivalStep = mSurvival.getSurvivalStep(mThirdResponseQuestionId);
-			NextQuestion();
 		}
 	}
 
@@ -157,26 +144,19 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		// Update the question text.
 		mQuestionTextView.setText(mSurvivalStep.getQuestionText());
 
+		// Update first response button.
 		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
 
 		// A value of -1 indicates the terminating survival step.
 		if (mFirstResponseQuestionId == -1) {
 			Toast.makeText(this, "Game Over", Toast.LENGTH_LONG).show();
 			finish();
-		} else if (mFirstResponseQuestionId == -2) {
-			Toast.makeText(this, "You Survived!", Toast.LENGTH_LONG).show();
-			finish();
 		}
 
-		// Update first response button.
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
 
 		// Update second response button.
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
 		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
-
-		// Update third response button.
-		mThirdResponseButton.setText(mSurvivalStep.getResponseText(2));
-		mThirdResponseQuestionId = mSurvivalStep.getResponseNextId(2);
 	}
 }
