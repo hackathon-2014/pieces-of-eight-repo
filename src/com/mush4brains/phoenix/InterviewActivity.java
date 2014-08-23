@@ -63,10 +63,8 @@ public class InterviewActivity extends Activity implements OnClickListener {
 				size.y * 94 / 100);
 		layout.setBackgroundColor(Color.rgb(163, 38, 56));
 		setContentView(layout, params);
-		Log.d(TAG, "Before new");
 		mSurvival = new SurvivalStepFactory(context.getAssets());
-		Log.d(TAG, "After new");
-
+		
 		// get attacker type
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -76,12 +74,18 @@ public class InterviewActivity extends Activity implements OnClickListener {
 			if (mAttacker.equals("pirate")) {
 				mSurvival.LoadData("text/pirates.txt");
 				mSurvivalStep = mSurvival.getSurvivalStep(0);
+			} else if (mAttacker.equals("ninja")) {
+				mSurvival.LoadData("text/ninjas.txt");
+				mSurvivalStep = mSurvival.getSurvivalStep(0);
+			} else if (mAttacker.equals("zombie")) {
+				mSurvival.LoadData("text/zombies.txt");
+				mSurvivalStep = mSurvival.getSurvivalStep(0);
 			}
 		}
 
 		// Display attacker type
 		TextView textView = new TextView(this);
-		textView.setText("You're facing a ");// + mAttacker);
+		textView.setText("You're facing a " + mAttacker);
 		textView.setX(5);
 		textView.setY(30);
 		textView.setBackgroundColor(Color.BLACK);
@@ -92,7 +96,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		// Display initial question
 		mQuestionTextView = new TextView(this);
-		mQuestionTextView.setText(mSurvivalStep.getQuestionText());// "In terrible situations such as this you must take personal inventory. Are you a man or a woman or both?");
+		mQuestionTextView.setText(mSurvivalStep.getQuestionText());
 		mQuestionTextView.setX(5);
 		mQuestionTextView.setY(110);
 		mQuestionTextView.setBackgroundColor(Color.BLACK);
@@ -138,8 +142,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 			mSurvivalStep = mSurvival.getSurvivalStep(mFirstResponseQuestionId);
 			NextQuestion();
 		} else if (v.getId() == mConstants.RESPONSE_TWO) {
-			mSurvivalStep = mSurvival
-					.getSurvivalStep(mSecondResponseQuestionId);
+			mSurvivalStep = mSurvival.getSurvivalStep(mSecondResponseQuestionId);
 			NextQuestion();
 		} else if (v.getId() == mConstants.RESPONSE_THREE) {
 			mSurvivalStep = mSurvival.getSurvivalStep(mThirdResponseQuestionId);
