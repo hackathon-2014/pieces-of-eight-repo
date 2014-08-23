@@ -1,5 +1,7 @@
 package com.mush4brains.phoenix;
 
+import java.util.Random;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -73,13 +75,13 @@ public class InterviewActivity extends Activity implements OnClickListener {
 			// Toast.LENGTH_SHORT).show();
 			if (mAttacker.equals("pirate")) {
 				mSurvival.LoadData("text/pirates.txt");
-				mSurvivalStep = mSurvival.getSurvivalStep(0);
+				mSurvivalStep = mSurvival.getSurvivalStep(randInt(0, 2));
 			} else if (mAttacker.equals("ninja")) {
 				mSurvival.LoadData("text/ninjas.txt");
-				mSurvivalStep = mSurvival.getSurvivalStep(0);
+				mSurvivalStep = mSurvival.getSurvivalStep(randInt(0, 2));
 			} else if (mAttacker.equals("zombie")) {
 				mSurvival.LoadData("text/zombies.txt");
-				mSurvivalStep = mSurvival.getSurvivalStep(0);
+				mSurvivalStep = mSurvival.getSurvivalStep(randInt(0, 2));
 			}
 		}
 
@@ -151,7 +153,8 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		// A value of -1 indicates the terminating survival step.
 		if (mFirstResponseQuestionId == -1) {
-			Toast.makeText(this, "Game Over", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, mSurvivalStep.getQuestionText(),
+					Toast.LENGTH_LONG).show();
 			// try {
 			// this.showDialog("Game Over");
 			// } catch (Exception e) {
@@ -190,5 +193,11 @@ public class InterviewActivity extends Activity implements OnClickListener {
 				});
 
 		builder.show();
+	}
+
+	public static int randInt(int min, int max) {
+		Random random = new Random();
+		int num = random.nextInt((max - min) + 1) + min;
+		return num;
 	}
 }
