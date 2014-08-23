@@ -1,9 +1,23 @@
-id	question	r1-id	r1	r2-id	r2	r3-id	r3
-0	You da man?	1	You bet	2	I'm not		
-1	Are you a man or woman?	3	The man!	2	I'm a girl.		
-2	Do you have a gun in your desk?	2	Yes	5	No		
-3	Is that sword above your desk real?	6	Real	5	Fake		
-4	Are you the fastest person in the office?	7	Yes	5	No		
-5	Oops! You're dead.	-1	Sorry				
-6	Wow! You killed it.	-1	Awesome!				
-7	You got a way.	-1	Cool!				
+id	questions	r1-id	r1	r2-id	r2
+0	You see pirates swinging from a tall masted ship into your office through the open window. Are you working alone?	3	Yes. I'm the only one working through lunch.	6	"No, but I'm the only one writing code."
+1	You hear screams from HR. Scallywags are chasing the women through the halls. Are you a man or a woman?	12	I'm a man.	13	I work in HR.
+2	You look up from your laptop to see a tall red-bearded lady pirate. Are you afraid of women?	18	Yes	19	No.
+3	Does your colleage have a large monitor?	4	Of course he does. He's a suck up!	9	Of course not. Who do you think does all the work around here.
+4	You swing your colleague's monitor at the ugly looking pirate. He ducks and lunges at you with a dagger. Are you wearing chain mail underwear?	16	Only the finest!	5	No
+5	You take it deep into the stomach. Your entrails fall to the floor.	-1	"Before you take your last breath, your push that final GIT commit!"		
+6	"Is the seedy looking pirate searching for booty, I mean love?"	7	Yes	9	No
+7	You notice the temp asleep at his desk. You signal the pirate and point to the temp. Does the pirate walk away from you toward the temp?	8	Yes	17	No
+8	You sneak out the back door. Congratulations! You survived.	-1	You hear a temp screaming in the background. You ignore it.		
+9	"You look down at your flip flops, observing your recently shaved legs. You're not ashamed. You point a leg in the direction of the pirate? Is he distracted?"	10	He begins salivating.	11	He laughs. He has seen chickens with nicer legs.
+10	"You beckon the pirate to your side, asking him to tie your shoes. He bends down and realizes you're wearing flip flops. You hit him upside the head with your tiny monitor. "	-1	He is unconscious. You escape.		
+11	You offer the pirate some of your KFC chicken legs from your lunch box. He is distracted.	-1	"You sneak out, staring at your nice legs."		
+12	"Knowing you'll never have a chance with the cute brunette from HR, you begin chasing her, and you trade coding for pirating."	-1	Arrrggg. Come here wench!		
+13	"Do you have any worthwhile skills such as engineering, programming, or design?"	14	I write code after hours for my startup!	15	I play Sudoku!
+14	You're really smart. No problem! You stop running and walk out the front door.	-1	You become a coder.		
+15	Sorry! You are married at sea to a smelly sailor with only three teeth. You later homeschool your pirate children at sea.	-1	Congratulations! He's a fine man.		
+16	The pirate is impressed and enquires where you obtained the chain mail. You respond by saying Victorias' Secret!	-1	He smiles and walks away.		
+17	The pirate remains focused upon you. He walks over and punches you in the nose. He drapes your body over his shoulder and takes you back to the ship. 	-1	You've met your fate.		
+18	That's understandable. You are afterall a programmer.	-1	You don't stand a chance.		
+19	Although your courage is admirable it is a bit misplaced. She swings a large axe at your skinny neck. Does she connect?	20	Can speak! There's an axe head in my throat.	21	She misses.
+20	You immediately start running around the office like a 'chicken with its�'. Too soon?	-1	Sorry!		
+21	She cuts a swath out of the top of your hair line. She thinks it looks bad. She leaves you crying in the corner.	-1	You survive.		
