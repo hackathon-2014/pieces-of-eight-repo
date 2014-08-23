@@ -1,0 +1,9 @@
+id	question	r1-id	r1	r2-id	r2	r3-id	r3
+0	You da man?	1	You bet	2	I'm not		
+1	Are you a man or woman?	3	The man!	2	I'm a girl.		
+2	Do you have a gun in your desk?	2	Yes	5	No		
+3	Is that sword above your desk real?	6	Real	5	Fake		
+4	Are you the fastest person in the office?	7	Yes	5	No		
+5	Oops! You're dead.	-1	Sorry				
+6	Wow! You killed it.	-1	Awesome!				
+7	You got a way.	-1	Cool!				

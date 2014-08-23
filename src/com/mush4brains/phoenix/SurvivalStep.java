@@ -21,6 +21,33 @@ public class SurvivalStep {
 		this.Answers = new HashMap<Integer, String>();
 	}
 
+	public int getResponseCount(){
+	  return Answers.size();
+	}
+	
+	public int getResponseNextId(int responseIndex){
+	 
+	  int count = 0;
+	  for (Map.Entry<Integer, String> entry:this.Answers.entrySet()){
+	    if (count == responseIndex)
+	      return entry.getKey();
+	    count++;
+	  }	 
+	 
+	  return -1;
+	}
+	
+	public String getResponseText(int responseIndex){
+	   int count = 0;
+	    for (Map.Entry<Integer, String> entry:this.Answers.entrySet()){
+	      if (count == responseIndex)
+	        return entry.getValue();
+	      count++;
+	    }  
+	   
+	    return "";
+	}
+	
 	public int getStepId() {
 		return this.stepId;
 	}
