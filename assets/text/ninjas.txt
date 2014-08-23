@@ -1,0 +1,10 @@
+id	questions	r1-id	r1	r2-id	r2
+0	The Accounting department has watched too many Saturday Kung Fu matinees. They are now dressing like Ninjas. Do they intimidate you?	3	What's an accounting department?	4	Audits will become painful.
+1	Your colleague is wearing black pajamas and climbing around the cubicles. What do you do?	5	Hand him a set of nunchuks.	6	Rub axle grease onto the partitions.
+2	Your programming  team comes to work dressed as ninjas and refuse to code. What do you do?	7	Nothing. They are not very good afterall.	8	Call in some real ninjas.
+3	Unimpressed you continue working.  From the distance the lead account hurls a black steel spike at the back of your head.	-1	She doesn't miss.		
+4	You hand the ninja accountant a scientific calculator and ask him to add 3 + 5.  	-1	Confused the accountant begins crying. 		
+5	As you calculated, your coworker hits himself in the head multiple times and collapses.	-1	That was easy!		
+6	Your coworked managed a really cook stunt before falling and cracking his head.	-1	That was too funny!		
+7	You continue to work extra hours and still meet all deadlines.	-1	You're too good!
+8	The real ninjas kick the coders' butts. However, they get confused and beat up each other.	-1	You have a good laugh and continue coding.		
