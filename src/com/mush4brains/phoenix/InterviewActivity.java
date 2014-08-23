@@ -1,7 +1,11 @@
 package com.mush4brains.phoenix;
 
+import java.util.Random;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -33,11 +37,9 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 	private Button mFirstResponseButton;
 	private Button mSecondResponseButton;
-	private Button mThirdResponseButton;
 
 	private int mFirstResponseQuestionId;
 	private int mSecondResponseQuestionId;
-	private int mThirdResponseQuestionId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,17 +71,17 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			mAttacker = extras.getString("attacker");
-			Toast.makeText(getApplicationContext(), mAttacker,
-					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(), mAttacker,
+			// Toast.LENGTH_SHORT).show();
 			if (mAttacker.equals("pirate")) {
 				mSurvival.LoadData("text/pirates.txt");
-				mSurvivalStep = mSurvival.getSurvivalStep(0);
+				mSurvivalStep = mSurvival.getSurvivalStep(randInt(0, 2));
 			} else if (mAttacker.equals("ninja")) {
 				mSurvival.LoadData("text/ninjas.txt");
-				mSurvivalStep = mSurvival.getSurvivalStep(0);
+				mSurvivalStep = mSurvival.getSurvivalStep(randInt(0, 2));
 			} else if (mAttacker.equals("zombie")) {
 				mSurvival.LoadData("text/zombies.txt");
-				mSurvivalStep = mSurvival.getSurvivalStep(0);
+				mSurvivalStep = mSurvival.getSurvivalStep(randInt(0, 2));
 			}
 		}
 
@@ -105,35 +107,27 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		mQuestionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		layout.addView(mQuestionTextView, params);
 
+		// Display first response button
 		mFirstResponseButton = new Button(this);
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
-		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
-		mFirstResponseButton.setY(mScreenHeight - 1000);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
+		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
+		mFirstResponseButton.setY(mScreenHeight * 4 / 10);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mFirstResponseButton.setId(mConstants.RESPONSE_ONE);
 		mFirstResponseButton.setOnClickListener(this);
 		layout.addView(mFirstResponseButton, params);
 		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
 
+		// Display second response button
 		mSecondResponseButton = new Button(this);
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
-		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
-		mSecondResponseButton.setY(mScreenHeight - 750);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
+		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
+		mSecondResponseButton.setY(mScreenHeight * 7 / 10);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mSecondResponseButton.setId(mConstants.RESPONSE_TWO);
 		mSecondResponseButton.setOnClickListener(this);
 		layout.addView(mSecondResponseButton, params);
 		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
-
-		mThirdResponseButton = new Button(this);
-		mThirdResponseButton.setText(mSurvivalStep.getResponseText(2));
-		mThirdResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
-		mThirdResponseButton.setY(mScreenHeight - 500);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
-		mThirdResponseButton.setId(mConstants.RESPONSE_THREE);
-		mThirdResponseButton.setOnClickListener(this);
-		layout.addView(mThirdResponseButton, params);
-		mThirdResponseQuestionId = mSurvivalStep.getResponseNextId(2);
 	}
 
 	@Override
@@ -145,9 +139,6 @@ public class InterviewActivity extends Activity implements OnClickListener {
 			mSurvivalStep = mSurvival
 					.getSurvivalStep(mSecondResponseQuestionId);
 			NextQuestion();
-		} else if (v.getId() == mConstants.RESPONSE_THREE) {
-			mSurvivalStep = mSurvival.getSurvivalStep(mThirdResponseQuestionId);
-			NextQuestion();
 		}
 	}
 
@@ -157,26 +148,56 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		// Update the question text.
 		mQuestionTextView.setText(mSurvivalStep.getQuestionText());
 
+		// Update first response button.
 		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
 
 		// A value of -1 indicates the terminating survival step.
 		if (mFirstResponseQuestionId == -1) {
-			Toast.makeText(this, "Game Over", Toast.LENGTH_LONG).show();
-			finish();
-		} else if (mFirstResponseQuestionId == -2) {
-			Toast.makeText(this, "You Survived!", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, mSurvivalStep.getQuestionText(),
+					Toast.LENGTH_LONG).show();
+			// try {
+			// this.showDialog("Game Over");
+			// } catch (Exception e) {
+			// Log.d(TAG, e.getMessage());
+			// }
 			finish();
 		}
 
-		// Update first response button.
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
 
 		// Update second response button.
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
 		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
+	}
 
-		// Update third response button.
-		mThirdResponseButton.setText(mSurvivalStep.getResponseText(2));
-		mThirdResponseQuestionId = mSurvivalStep.getResponseNextId(2);
+	private void showDialog(final String alertMessage) throws Exception {
+		AlertDialog.Builder builder = new AlertDialog.Builder(
+				InterviewActivity.this);
+		builder.setMessage(alertMessage);
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// do something positive
+				Log.d(TAG, "Positive");
+				dialog.dismiss();
+			}
+		});
+
+		builder.setNegativeButton("Bummer",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Log.d(TAG, "Negative");
+						dialog.dismiss();
+					}
+				});
+
+		builder.show();
+	}
+
+	public static int randInt(int min, int max) {
+		Random random = new Random();
+		int num = random.nextInt((max - min) + 1) + min;
+		return num;
 	}
 }
