@@ -107,9 +107,9 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		mFirstResponseButton = new Button(this);
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
-		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 8 / 10) / 3);// 5);
-		mFirstResponseButton.setY(mScreenHeight - 460);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 8 / 10, 100);
+		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
+		mFirstResponseButton.setY(mScreenHeight - 1000);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
 		mFirstResponseButton.setId(mConstants.RESPONSE_ONE);
 		mFirstResponseButton.setOnClickListener(this);
 		layout.addView(mFirstResponseButton, params);
@@ -117,9 +117,9 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		mSecondResponseButton = new Button(this);
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
-		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 8 / 10) / 3);// 5);
-		mSecondResponseButton.setY(mScreenHeight - 340);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 8 / 10, 100);
+		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
+		mSecondResponseButton.setY(mScreenHeight - 750);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
 		mSecondResponseButton.setId(mConstants.RESPONSE_TWO);
 		mSecondResponseButton.setOnClickListener(this);
 		layout.addView(mSecondResponseButton, params);
@@ -127,9 +127,9 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		mThirdResponseButton = new Button(this);
 		mThirdResponseButton.setText(mSurvivalStep.getResponseText(2));
-		mThirdResponseButton.setX((mScreenWidth - mScreenWidth * 8 / 10) / 3);// 5);
-		mThirdResponseButton.setY(mScreenHeight - 220);
-		params = new RelativeLayout.LayoutParams(mScreenWidth * 8 / 10, 100);
+		mThirdResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 3);
+		mThirdResponseButton.setY(mScreenHeight - 500);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 200);
 		mThirdResponseButton.setId(mConstants.RESPONSE_THREE);
 		mThirdResponseButton.setOnClickListener(this);
 		layout.addView(mThirdResponseButton, params);

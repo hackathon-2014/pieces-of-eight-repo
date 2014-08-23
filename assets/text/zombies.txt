@@ -1,0 +1,17 @@
+id	questions	r1-id	r1	r2-id	r2
+0	John, a programmer who once worked with Grace Hopper, is walking slower than normal. Do you approach him and enquire about his health?	3	Naturally. I'm a people person.	4	No way. He smells like Bengay.
+1	Your Chief Technology Officer is a zombie. Are there any inferior coders nearby?	7	Just about everybody is inferior to me.	10	I'm the only one here.
+2	All the temps have become zombies. What do you do?	15	Nothing. They are just temps.	15	Call the temp agency and request more temps.
+3	John bites you. Moments later you become a Zombie.	-1	Thanks for nothing John.
+4	You tap your colleage on the shoulder and point to John. You say, 'shouldn't you go to him?'	5	He answers yes.	6	No way he says. He smells like Bengay.
+5	Your colleague is a sucker. While he is being bitten by John you escape casually out the back door.	-1	You're safe.
+6	You pull out your classic edition of Life Magazine and turn to a photo of Grace Hopper in her younger years when she was only 70. John almost smiles and is distracted.	-1	You walk by John and give him the photo.
+7	You hand one of your coworkers the requisition and explain that the CTO has a nasty hangover. Does he believe you?	8	Yes, he's a sucker	9	He suggests the supervisor
+8	Your coworks manages somehow to get the signature you want before he is eaten.	-1	You're getting a new server.
+9	You explain to your supervisor that the CTO has a hangover and you need a signature on the requisition. The supervisor grabs the paperwork and rushes to the CTO, where he is slowly devoured.	-1	That sucks. He didn't get the signature.
+10	You decide to distract the CTO. You start shouting 'scalability', 'ROI', 'customer satisfaction', 'outsourcing will save money'. Does the CTO get excited.	11	He drools even more.	12	Can't tell, he looks the same.
+11	You escape the CTO as the medulla at the base of his skull begins firing neurons. The CTO is happy!	-1	You escape.
+12	You hit the sales guy and a programmer on the head, and scoop their brains into two different buckets. Which bucket does the CTO prefer?	13	Small sales brain.	14	Large programming brain.
+13	The CTO eats the brain and is partially satisified. 	-1	You escape.
+14	The CTO eats the brain and is fully  satisified. 	-1	You escape and your CTO is happy.
+15	No big deal about the temps.	-1	You keep on coding.
