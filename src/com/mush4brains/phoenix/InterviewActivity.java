@@ -18,126 +18,151 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InterviewActivity extends Activity implements OnClickListener{
-  
-  private int mScreenWidth;
-  private int mScreenHeight;
-  private GlobalConstants mConstants = GlobalConstants.getInstance();
-  private String mAttacker;
-  private SurvivalStepFactory mSurvival;
-  private SurvivalStep mSurvivalStep;
-  
-  private String TAG =  "InterviewActivity";
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_interview);
-    
-    
-    //portrait mode only
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    
-    //get dimensions
-    Context context = getApplicationContext();
-    Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-    Point size = new Point();
-    display.getSize(size);
-    mScreenWidth = size.x;
-    mScreenHeight = size.y;
-    
-    //create layout
-    RelativeLayout layout = new RelativeLayout(this);
-    LayoutParams params = null;
-    params = new RelativeLayout.LayoutParams(size.x * 94/100, size.y * 94/100);
-    layout.setBackgroundColor(Color.rgb(163,  38,  56));
-    setContentView(layout, params);    
-    Log.d(TAG,"Before new");
-    mSurvival = new SurvivalStepFactory(context.getAssets());
-    Log.d(TAG, "After new");
-    
-    //get attacker type
-    Bundle extras = getIntent().getExtras();
-    if (extras != null) 
-    {
-      mAttacker = extras.getString("attacker");
-      Toast.makeText(getApplicationContext(), mAttacker,Toast.LENGTH_SHORT).show();
-      if (mAttacker.equals("pirate")){
-        mSurvival.LoadData("text/pirates.txt");
-        mSurvivalStep = mSurvival.getSurvivalStep(1);
+public class InterviewActivity extends Activity implements OnClickListener {
 
-     
-      }      
-    }
-    
-    
-    
-    //Display attacker type
-    TextView textView = new TextView(this);
-    textView.setText("You're facing a ");// + mAttacker);
-    textView.setX(5);
-    textView.setY(30);
-    textView.setBackgroundColor(Color.BLACK);
-    textView.setTextColor(Color.YELLOW);    
-    params = new RelativeLayout.LayoutParams(mScreenWidth * 9/10,70);
-    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-    layout.addView(textView, params);
+	private int mScreenWidth;
+	private int mScreenHeight;
+	private GlobalConstants mConstants = GlobalConstants.getInstance();
+	private String mAttacker;
+	private SurvivalStepFactory mSurvival;
+	private SurvivalStep mSurvivalStep;
 
-    //Display initial question 
-    textView = new TextView(this);
-    textView.setText(mSurvivalStep.getQuestionText());// "In terrible situations such as this you must take personal inventory. Are you a man or a woman or both?");
-    textView.setX(5);
-    textView.setY(110);
-    textView.setBackgroundColor(Color.BLACK);
-    textView.setTextColor(Color.YELLOW);
-    params = new RelativeLayout.LayoutParams(mScreenWidth * 9/10, 400);
-    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-    layout.addView(textView, params);
-    
-    Button button = new Button(this);
-    button.setText(mSurvivalStep.getResponseText(0));
-    button.setX((mScreenWidth - mScreenWidth * 8/10)/3);//   5);
-    button.setY(mScreenHeight - 460);
-    params = new RelativeLayout.LayoutParams(mScreenWidth * 8/10, 100);
-    button.setId(mConstants.RESPONSE_ONE);
-    button.setOnClickListener(this);
-    layout.addView(button, params);
-    
-    button = new Button(this);    
-    button.setText(mSurvivalStep.getResponseText(1));
-    button.setX((mScreenWidth - mScreenWidth * 8/10)/3);//   5);
-    button.setY(mScreenHeight - 340);
-    params = new RelativeLayout.LayoutParams(mScreenWidth * 8/10, 100);
-    button.setId(mConstants.RESPONSE_TWO);
-    button.setOnClickListener(this);
-    layout.addView(button, params);
-    
-    button = new Button(this);
-    button.setText(mSurvivalStep.getResponseText(2));
-    button.setX((mScreenWidth - mScreenWidth * 8/10)/3);//   5);
-    button.setY(mScreenHeight - 220);
-    params = new RelativeLayout.LayoutParams(mScreenWidth * 8/10, 100);
-    button.setId(mConstants.RESPONSE_THREE);
-    button.setOnClickListener(this);
-    layout.addView(button, params);
+	private String TAG = "InterviewActivity";
 
-  }
+	private TextView mQuestionTextView;
 
-  @Override
-  public void onClick(View v) {
-    // TODO Auto-generated method stub
-    
-    if (v.getId() == mConstants.RESPONSE_ONE){
-      
-    }
-    else if (v.getId() == mConstants.RESPONSE_TWO){
-      
-    }
-    else if (v.getId() == mConstants.RESPONSE_THREE){
-      
-    }
-    
-  }
-  
-  
-  
+	private Button mFirstResponseButton;
+	private Button mSecondResponseButton;
+	private Button mThirdResponseButton;
+
+	private int mFirstResponseQuestionId;
+	private int mSecondResponseQuestionId;
+	private int mThirdResponseQuestionId;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_interview);
+
+		// portrait mode only
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+		// get dimensions
+		Context context = getApplicationContext();
+		Display display = ((WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		mScreenWidth = size.x;
+		mScreenHeight = size.y;
+
+		// create layout
+		RelativeLayout layout = new RelativeLayout(this);
+		LayoutParams params = null;
+		params = new RelativeLayout.LayoutParams(size.x * 94 / 100,
+				size.y * 94 / 100);
+		layout.setBackgroundColor(Color.rgb(163, 38, 56));
+		setContentView(layout, params);
+		Log.d(TAG, "Before new");
+		mSurvival = new SurvivalStepFactory(context.getAssets());
+		Log.d(TAG, "After new");
+
+		// get attacker type
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			mAttacker = extras.getString("attacker");
+			Toast.makeText(getApplicationContext(), mAttacker,
+					Toast.LENGTH_SHORT).show();
+			if (mAttacker.equals("pirate")) {
+				mSurvival.LoadData("text/pirates.txt");
+				mSurvivalStep = mSurvival.getSurvivalStep(0);
+			}
+		}
+
+		// Display attacker type
+		TextView textView = new TextView(this);
+		textView.setText("You're facing a ");// + mAttacker);
+		textView.setX(5);
+		textView.setY(30);
+		textView.setBackgroundColor(Color.BLACK);
+		textView.setTextColor(Color.YELLOW);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 70);
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+		layout.addView(textView, params);
+
+		// Display initial question
+		mQuestionTextView = new TextView(this);
+		mQuestionTextView.setText(mSurvivalStep.getQuestionText());// "In terrible situations such as this you must take personal inventory. Are you a man or a woman or both?");
+		mQuestionTextView.setX(5);
+		mQuestionTextView.setY(110);
+		mQuestionTextView.setBackgroundColor(Color.BLACK);
+		mQuestionTextView.setTextColor(Color.YELLOW);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 400);
+		mQuestionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+		layout.addView(mQuestionTextView, params);
+
+		mFirstResponseButton = new Button(this);
+		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
+		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 8 / 10) / 3);// 5);
+		mFirstResponseButton.setY(mScreenHeight - 460);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 8 / 10, 100);
+		mFirstResponseButton.setId(mConstants.RESPONSE_ONE);
+		mFirstResponseButton.setOnClickListener(this);
+		layout.addView(mFirstResponseButton, params);
+		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
+
+		mSecondResponseButton = new Button(this);
+		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
+		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 8 / 10) / 3);// 5);
+		mSecondResponseButton.setY(mScreenHeight - 340);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 8 / 10, 100);
+		mSecondResponseButton.setId(mConstants.RESPONSE_TWO);
+		mSecondResponseButton.setOnClickListener(this);
+		layout.addView(mSecondResponseButton, params);
+		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
+
+		mThirdResponseButton = new Button(this);
+		mThirdResponseButton.setText(mSurvivalStep.getResponseText(2));
+		mThirdResponseButton.setX((mScreenWidth - mScreenWidth * 8 / 10) / 3);// 5);
+		mThirdResponseButton.setY(mScreenHeight - 220);
+		params = new RelativeLayout.LayoutParams(mScreenWidth * 8 / 10, 100);
+		mThirdResponseButton.setId(mConstants.RESPONSE_THREE);
+		mThirdResponseButton.setOnClickListener(this);
+		layout.addView(mThirdResponseButton, params);
+		mThirdResponseQuestionId = mSurvivalStep.getResponseNextId(2);
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (v.getId() == mConstants.RESPONSE_ONE) {
+			mSurvivalStep = mSurvival.getSurvivalStep(mFirstResponseQuestionId);
+			NextQuestion();
+		} else if (v.getId() == mConstants.RESPONSE_TWO) {
+			mSurvivalStep = mSurvival
+					.getSurvivalStep(mSecondResponseQuestionId);
+			NextQuestion();
+		} else if (v.getId() == mConstants.RESPONSE_THREE) {
+			mSurvivalStep = mSurvival.getSurvivalStep(mThirdResponseQuestionId);
+			NextQuestion();
+		}
+	}
+
+	// Updates the UI for the next question.
+	private void NextQuestion() {
+
+		// Update the question text.
+		mQuestionTextView.setText(mSurvivalStep.getQuestionText());
+
+		// Update first response button.
+		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
+		mFirstResponseQuestionId = mSurvivalStep.getResponseNextId(0);
+
+		// Update second response button.
+		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
+		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
+
+		// Update third response button.
+		mThirdResponseButton.setText(mSurvivalStep.getResponseText(2));
+		mThirdResponseQuestionId = mSurvivalStep.getResponseNextId(2);
+	}
 }

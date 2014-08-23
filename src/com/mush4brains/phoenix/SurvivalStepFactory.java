@@ -22,7 +22,6 @@ public class SurvivalStepFactory {
 	public SurvivalStepFactory(AssetManager assetManager) {
 		this.mSteps = new ArrayList<SurvivalStep>();
 		this.mAssetManager = assetManager;
-		//AssetManager asset = getApplicationContext().getAssets();
 	}
 
 	public static SurvivalStep getTestSurvivalStep() {
@@ -34,7 +33,7 @@ public class SurvivalStepFactory {
 
 	public SurvivalStep getSurvivalStep(int stepId) {
 		for (int i = 0; i < mSteps.size(); i++) {
-	
+
 			SurvivalStep step = mSteps.get(i);
 			if (step.getStepId() == stepId) {
 				return step;
@@ -50,17 +49,17 @@ public class SurvivalStepFactory {
 	}
 
 	public void LoadData(String filename) {
-	  Log.d("FACTORY", filename);
-	  
+		Log.d("FACTORY", filename);
+
 		readDataFile(filename);
 	}
 
 	private void readDataFile(String filename) {
 		try {
-		  Log.d("FACTORY", "before input");
+			Log.d("FACTORY", "before input");
 			InputStream inputStream = mAssetManager.open(filename);
-			 Log.d("FACTORY", "after input");
-			 
+			Log.d("FACTORY", "after input");
+
 			if (inputStream != null) {
 				InputStreamReader isr = new InputStreamReader(inputStream);
 				BufferedReader br = new BufferedReader(isr);
