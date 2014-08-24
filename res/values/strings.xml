@@ -4,5 +4,6 @@
     <string name="app_name">phoenix</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_interview">InterviewActivity</string>
+    <string name="title_activity_message">MessageActivity</string>
 
 </resources>

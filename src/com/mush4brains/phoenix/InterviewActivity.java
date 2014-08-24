@@ -127,7 +127,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		mFirstResponseButton = new Button(this);
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
 		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
-		mFirstResponseButton.setY(mScreenHeight - 490);//* 4 / 10);
+		mFirstResponseButton.setY(mScreenHeight - 550);//* 4 / 10);
 		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mFirstResponseButton.setId(mConstants.RESPONSE_ONE);
 		mFirstResponseButton.setOnClickListener(this);
@@ -138,7 +138,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		mSecondResponseButton = new Button(this);
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
 		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
-		mSecondResponseButton.setY(mScreenHeight - 270);// * 7 / 10);
+		mSecondResponseButton.setY(mScreenHeight - 330);// * 7 / 10);
 		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mSecondResponseButton.setId(mConstants.RESPONSE_TWO);
 		mSecondResponseButton.setOnClickListener(this);
