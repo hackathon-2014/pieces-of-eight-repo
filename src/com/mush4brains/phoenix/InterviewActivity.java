@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -68,10 +69,9 @@ public class InterviewActivity extends Activity implements OnClickListener {
 				size.y * 94 / 100);
 		layout.setBackgroundColor(Color.rgb(163, 38, 56));
 		setContentView(layout, params);
-		int bambooId = getResources().getIdentifier("bamboo","drawable", this.getPackageName());
-//    int skinId = getResources().getIdentifier("skin","drawable", this.getPackageName());
-//    
-  //draws background
+		
+		//draws background
+		int bambooId = getResources().getIdentifier("bamboo","drawable", this.getPackageName());		
     if (Build.VERSION.SDK_INT >= 16)
       layout.setBackground(getResources().getDrawable(bambooId));
     else
@@ -169,20 +169,16 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		// A value of -1 indicates the terminating survival step.
 		if (mFirstResponseQuestionId == -1) {
-		  Toast toast = Toast.makeText(getApplicationContext(), mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0), Toast.LENGTH_SHORT);
-		  toast.setGravity(Gravity.TOP, 0, 0);
-		  toast.show();
+//		  Toast toast = Toast.makeText(getApplicationContext(), mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0), Toast.LENGTH_SHORT);
+//		  toast.setGravity(Gravity.TOP, 0, 0);
+//		  toast.show();
 		  
+      Bundle bundle = new Bundle();
+      bundle.putString("message", mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0));
+      Intent intent = new Intent(this, MessageActivity.class);
+      intent.putExtras(bundle);
+      startActivity(intent);		  
 		  
-		//	Toast.makeText(this, mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0),
-	//				Toast.LENGTH_SHORT).show();
-//			 try {
-//			   Log.d(TAG, "Step -1"); 
-//			 this.showDialog("Game Over");
-//			 Log.d(TAG, "Step 0");
-//			 } catch (Exception e) {
-//			 Log.d(TAG, e.getMessage());
-//			 }
 			finish();
 		}
 
@@ -191,33 +187,6 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		// Update second response button.
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
 		mSecondResponseQuestionId = mSurvivalStep.getResponseNextId(1);
-	}
-
-	private void showDialog(final String alertMessage) throws Exception {
-		AlertDialog.Builder builder = new AlertDialog.Builder(
-				InterviewActivity.this);
-		Log.d(TAG, "Step 1");
-		builder.setMessage(alertMessage);
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// do something positive
-				Log.d(TAG, "Positive");
-				dialog.dismiss();
-			}
-		});
-
-		Log.d(TAG, "Step 2");
-		builder.setNegativeButton("Bummer",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Log.d(TAG, "Negative");
-						dialog.dismiss();
-					}
-				});
-		Log.d(TAG, "Step 3");
-		builder.show();
 	}
 
 	public static int randInt(int min, int max) {
