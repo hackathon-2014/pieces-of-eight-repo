@@ -11,9 +11,11 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -66,14 +68,14 @@ public class InterviewActivity extends Activity implements OnClickListener {
 				size.y * 94 / 100);
 		layout.setBackgroundColor(Color.rgb(163, 38, 56));
 		setContentView(layout, params);
-		
-    int skinId = getResources().getIdentifier("skin","drawable", this.getPackageName());
-    
+		int bambooId = getResources().getIdentifier("bamboo","drawable", this.getPackageName());
+//    int skinId = getResources().getIdentifier("skin","drawable", this.getPackageName());
+//    
   //draws background
     if (Build.VERSION.SDK_INT >= 16)
-      layout.setBackground(getResources().getDrawable(skinId));
+      layout.setBackground(getResources().getDrawable(bambooId));
     else
-      layout.setBackgroundDrawable(getResources().getDrawable(skinId));		
+      layout.setBackgroundDrawable(getResources().getDrawable(bambooId));		
 		
 		
 		mSurvival = new SurvivalStepFactory(context.getAssets());
@@ -98,8 +100,9 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		// Display attacker type
 		TextView textView = new TextView(this);
-		textView.setText("You're facing a " + mAttacker);
-		textView.setX(5);
+		textView.setText("Oh no! It's a " + mAttacker + "!");
+		textView.setGravity(Gravity.CENTER_HORIZONTAL);
+		textView.setX((mScreenWidth - mScreenWidth * 9 / 10) / 4);//5);
 		textView.setY(30);
 		textView.setBackgroundColor(Color.BLACK);
 		textView.setTextColor(Color.YELLOW);
@@ -110,8 +113,10 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		// Display initial question
 		mQuestionTextView = new TextView(this);
 		mQuestionTextView.setText(mSurvivalStep.getQuestionText());
-		mQuestionTextView.setX(5);
+		mQuestionTextView.setX((mScreenWidth - mScreenWidth * 9 / 10) / 4);//5);
 		mQuestionTextView.setY(110);
+		mQuestionTextView.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+		mQuestionTextView.setMovementMethod(LinkMovementMethod.getInstance());
 		mQuestionTextView.setBackgroundColor(Color.BLACK);
 		mQuestionTextView.setTextColor(Color.YELLOW);
 		params = new RelativeLayout.LayoutParams(mScreenWidth * 9 / 10, 400);
@@ -122,7 +127,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		mFirstResponseButton = new Button(this);
 		mFirstResponseButton.setText(mSurvivalStep.getResponseText(0));
 		mFirstResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
-		mFirstResponseButton.setY(mScreenHeight * 4 / 10);
+		mFirstResponseButton.setY(mScreenHeight - 490);//* 4 / 10);
 		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mFirstResponseButton.setId(mConstants.RESPONSE_ONE);
 		mFirstResponseButton.setOnClickListener(this);
@@ -133,7 +138,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 		mSecondResponseButton = new Button(this);
 		mSecondResponseButton.setText(mSurvivalStep.getResponseText(1));
 		mSecondResponseButton.setX((mScreenWidth - mScreenWidth * 9 / 10) / 2);
-		mSecondResponseButton.setY(mScreenHeight * 7 / 10);
+		mSecondResponseButton.setY(mScreenHeight - 270);// * 7 / 10);
 		params = new RelativeLayout.LayoutParams(mScreenWidth * 84 / 100, 200);
 		mSecondResponseButton.setId(mConstants.RESPONSE_TWO);
 		mSecondResponseButton.setOnClickListener(this);
@@ -164,13 +169,20 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		// A value of -1 indicates the terminating survival step.
 		if (mFirstResponseQuestionId == -1) {
-			Toast.makeText(this, mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0),
-					Toast.LENGTH_LONG).show();
-			// try {
-			// this.showDialog("Game Over");
-			// } catch (Exception e) {
-			// Log.d(TAG, e.getMessage());
-			// }
+		  Toast toast = Toast.makeText(getApplicationContext(), mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0), Toast.LENGTH_SHORT);
+		  toast.setGravity(Gravity.TOP, 0, 0);
+		  toast.show();
+		  
+		  
+		//	Toast.makeText(this, mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0),
+	//				Toast.LENGTH_SHORT).show();
+//			 try {
+//			   Log.d(TAG, "Step -1"); 
+//			 this.showDialog("Game Over");
+//			 Log.d(TAG, "Step 0");
+//			 } catch (Exception e) {
+//			 Log.d(TAG, e.getMessage());
+//			 }
 			finish();
 		}
 
@@ -184,6 +196,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 	private void showDialog(final String alertMessage) throws Exception {
 		AlertDialog.Builder builder = new AlertDialog.Builder(
 				InterviewActivity.this);
+		Log.d(TAG, "Step 1");
 		builder.setMessage(alertMessage);
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			@Override
@@ -194,6 +207,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 			}
 		});
 
+		Log.d(TAG, "Step 2");
 		builder.setNegativeButton("Bummer",
 				new DialogInterface.OnClickListener() {
 					@Override
@@ -202,7 +216,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 						dialog.dismiss();
 					}
 				});
-
+		Log.d(TAG, "Step 3");
 		builder.show();
 	}
 

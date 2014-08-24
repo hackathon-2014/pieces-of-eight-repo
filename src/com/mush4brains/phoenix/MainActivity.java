@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		// set title
 		ActionBar actionBar = getActionBar();
-		actionBar.setTitle("Your Personal Office Survivor Guide");
+		actionBar.setTitle("Programmer's Office Survivor Guide");
 		actionBar.setSubtitle("Ignore Everyone Else");
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color
 				.rgb(163, 38, 56)));
@@ -65,13 +65,13 @@ public class MainActivity extends Activity implements OnClickListener {
 				LayoutParams.MATCH_PARENT);
 		setContentView(layout, params);
 
-//		int skinId = getResources().getIdentifier("skin","drawable", this.getPackageName());
-//		
-//	//draws background
-//		if (Build.VERSION.SDK_INT >= 16)
-//		  layout.setBackground(getResources().getDrawable(skinId));
-//		else
-//		  layout.setBackgroundDrawable(getResources().getDrawable(skinId));
+		int bambooId = getResources().getIdentifier("bamboo","drawable", this.getPackageName());
+		
+	//draws background
+		if (Build.VERSION.SDK_INT >= 16)
+		  layout.setBackground(getResources().getDrawable(bambooId));
+		else
+		  layout.setBackgroundDrawable(getResources().getDrawable(bambooId));
 	
 	
 		// add text
