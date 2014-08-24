@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -65,6 +66,16 @@ public class InterviewActivity extends Activity implements OnClickListener {
 				size.y * 94 / 100);
 		layout.setBackgroundColor(Color.rgb(163, 38, 56));
 		setContentView(layout, params);
+		
+    int skinId = getResources().getIdentifier("skin","drawable", this.getPackageName());
+    
+  //draws background
+    if (Build.VERSION.SDK_INT >= 16)
+      layout.setBackground(getResources().getDrawable(skinId));
+    else
+      layout.setBackgroundDrawable(getResources().getDrawable(skinId));		
+		
+		
 		mSurvival = new SurvivalStepFactory(context.getAssets());
 
 		// get attacker type
@@ -153,7 +164,7 @@ public class InterviewActivity extends Activity implements OnClickListener {
 
 		// A value of -1 indicates the terminating survival step.
 		if (mFirstResponseQuestionId == -1) {
-			Toast.makeText(this, mSurvivalStep.getQuestionText(),
+			Toast.makeText(this, mSurvivalStep.getQuestionText() + "\n" + mSurvivalStep.getResponseText(0),
 					Toast.LENGTH_LONG).show();
 			// try {
 			// this.showDialog("Game Over");

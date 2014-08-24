@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Display;
@@ -19,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /* MainActivity entry point to app
  * Team: Chuck, Derick, and Sara
@@ -65,6 +65,15 @@ public class MainActivity extends Activity implements OnClickListener {
 				LayoutParams.MATCH_PARENT);
 		setContentView(layout, params);
 
+//		int skinId = getResources().getIdentifier("skin","drawable", this.getPackageName());
+//		
+//	//draws background
+//		if (Build.VERSION.SDK_INT >= 16)
+//		  layout.setBackground(getResources().getDrawable(skinId));
+//		else
+//		  layout.setBackgroundDrawable(getResources().getDrawable(skinId));
+	
+	
 		// add text
 		TextView textView = new TextView(this);
 		textView.setText("Select your attacker...");
@@ -83,7 +92,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		StateListDrawable states = new StateListDrawable();
 		int idResourcePressed = getResources().getIdentifier("ic_pressed",
 				"drawable", this.getPackageName());
-		int idResourcePirate = getResources().getIdentifier("ic_piratemain",
+		int idResourcePirate = getResources().getIdentifier("ic_pirate",
 				"drawable", this.getPackageName());
 		states.addState(new int[] { android.R.attr.state_pressed },
 				getResources().getDrawable(idResourcePressed));
@@ -100,7 +109,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		imageView.setY(400);
 		imageView.setOnClickListener(this);
 		states = new StateListDrawable();
-		int idResourceNinja = getResources().getIdentifier("ic_ninjamain",
+		int idResourceNinja = getResources().getIdentifier("ic_ninja",
 				"drawable", this.getPackageName());
 		states.addState(new int[] { android.R.attr.state_pressed },
 				getResources().getDrawable(idResourcePressed));
@@ -117,7 +126,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		imageView.setY(700);
 		imageView.setOnClickListener(this);
 		states = new StateListDrawable();
-		int idResourceZombie = getResources().getIdentifier("ic_zombiemain",
+		int idResourceZombie = getResources().getIdentifier("ic_zombie",
 				"drawable", this.getPackageName());
 		states.addState(new int[] { android.R.attr.state_pressed },
 				getResources().getDrawable(idResourcePressed));
